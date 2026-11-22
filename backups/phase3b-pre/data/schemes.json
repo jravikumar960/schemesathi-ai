@@ -1,0 +1,186 @@
+{
+  "data_notice": "Synthetic development data only. Not actual government schemes.",
+  "schemes": [
+    {
+      "source_verified_on": null,
+      "application_steps": [
+        "Review illustrative eligibility criteria",
+        "Prepare sample documents",
+        "Complete the demonstration workflow"
+      ],
+      "level": "STATE",
+      "verification_status": "UNVERIFIED_ILLUSTRATIVE",
+      "benefit_summary": "Illustrative educational assistance.",
+      "name": "Illustrative Student Support Scheme 1",
+      "official_url": "https://example.org/",
+      "description": "Synthetic scholarship example for testing.",
+      "application_deadline": null,
+      "slug": "illustrative-student-support-1",
+      "document_requirements": [
+        "Sample income certificate",
+        "Sample student enrollment proof"
+      ],
+      "is_illustrative": true,
+      "eligibility_conditions": [
+        {
+          "field": "annual_family_income",
+          "operator": "lte",
+          "description": "Annual family income must be at most INR 250000.",
+          "value": 250000
+        }
+      ]
+    },
+    {
+      "source_verified_on": null,
+      "application_steps": [
+        "Review illustrative eligibility criteria",
+        "Prepare sample documents",
+        "Complete the demonstration workflow"
+      ],
+      "level": "STATE",
+      "verification_status": "UNVERIFIED_ILLUSTRATIVE",
+      "benefit_summary": "Illustrative educational assistance.",
+      "name": "Illustrative Student Support Scheme 2",
+      "official_url": "https://example.org/",
+      "description": "Synthetic scholarship example for testing.",
+      "application_deadline": null,
+      "slug": "illustrative-student-support-2",
+      "document_requirements": [
+        "Sample income certificate",
+        "Sample student enrollment proof"
+      ],
+      "is_illustrative": true,
+      "eligibility_conditions": [
+        {
+          "field": "annual_family_income",
+          "operator": "lte",
+          "description": "Annual family income must be at most INR 250000.",
+          "value": 250000
+        }
+      ]
+    },
+    {
+      "source_verified_on": null,
+      "application_steps": [
+        "Review illustrative eligibility criteria",
+        "Prepare sample documents",
+        "Complete the demonstration workflow"
+      ],
+      "level": "STATE",
+      "verification_status": "UNVERIFIED_ILLUSTRATIVE",
+      "benefit_summary": "Illustrative educational assistance.",
+      "name": "Illustrative Student Support Scheme 3",
+      "official_url": "https://example.org/",
+      "description": "Synthetic scholarship example for testing.",
+      "application_deadline": null,
+      "slug": "illustrative-student-support-3",
+      "document_requirements": [
+        "Sample income certificate",
+        "Sample student enrollment proof"
+      ],
+      "is_illustrative": true,
+      "eligibility_conditions": [
+        {
+          "field": "annual_family_income",
+          "operator": "lte",
+          "description": "Annual family income must be at most INR 250000.",
+          "value": 250000
+        }
+      ]
+    },
+    {
+      "source_verified_on": null,
+      "application_steps": [
+        "Review illustrative eligibility criteria",
+        "Prepare sample documents",
+        "Complete the demonstration workflow"
+      ],
+      "level": "STATE",
+      "verification_status": "UNVERIFIED_ILLUSTRATIVE",
+      "benefit_summary": "Illustrative educational assistance.",
+      "name": "Illustrative Student Support Scheme 4",
+      "official_url": "https://example.org/",
+      "description": "Synthetic scholarship example for testing.",
+      "application_deadline": null,
+      "slug": "illustrative-student-support-4",
+      "document_requirements": [
+        "Sample income certificate",
+        "Sample student enrollment proof"
+      ],
+      "is_illustrative": true,
+      "eligibility_conditions": [
+        {
+          "field": "annual_family_income",
+          "operator": "lte",
+          "description": "Annual family income must be at most INR 250000.",
+          "value": 250000
+        }
+      ]
+    },
+    {
+      "source_verified_on": null,
+      "application_steps": [
+        "Review illustrative eligibility criteria",
+        "Prepare sample documents",
+        "Complete the demonstration workflow"
+      ],
+      "level": "STATE",
+      "verification_status": "UNVERIFIED_ILLUSTRATIVE",
+      "benefit_summary": "Illustrative educational assistance.",
+      "name": "Illustrative Student Support Scheme 5",
+      "official_url": "https://example.org/",
+      "description": "Synthetic scholarship example for testing.",
+      "application_deadline": null,
+      "slug": "illustrative-student-support-5",
+      "document_requirements": [
+        "Sample income certificate",
+        "Sample student enrollment proof"
+      ],
+      "is_illustrative": true,
+      "eligibility_conditions": [
+        {
+          "field": "annual_family_income",
+          "operator": "lte",
+          "description": "Annual family income must be at most INR 250000.",
+          "value": 250000
+        }
+      ]
+    },
+    {
+      "name": "Telangana Post-Matric Scholarships",
+      "slug": "telangana-post-matric-scholarships",
+      "description": "Government of Telangana ePASS programme supporting eligible students pursuing post-secondary education. Income limits vary by welfare category and, for BC/EBC/Minority students, residence.",
+      "benefit_summary": "Reimbursement of eligible tuition fees (RTF) and maintenance support (MTF), subject to applicable programme rules.",
+      "level": "STATE",
+      "eligibility_conditions": [],
+      "document_requirements": [
+        "SSC examination details",
+        "MeeSeva caste or relevant category certificate, where applicable",
+        "MeeSeva income certificate",
+        "Study or bonafide certificate",
+        "Previous academic marks memo",
+        "Bank account documentation where applicable",
+        "CET allotment order for applicable professional courses",
+        "Aadhaar documentation required by the official portal",
+        "Recent passport-size photograph for fresh registration",
+        "Mobile number accessible for registration OTP",
+        "Study or bonafide certificates for the last seven consecutive years, as applicable"
+      ],
+      "application_steps": [
+        "Visit the official Telangana ePASS portal.",
+        "Open Post-Matric Scholarship Services.",
+        "Select the appropriate fresh or renewal registration.",
+        "Review the current academic-year instructions and eligibility.",
+        "Complete registration on the government portal.",
+        "Provide required certificates and documents directly to ePASS.",
+        "Complete applicable institution or biometric verification.",
+        "Use the official portal to check application status."
+      ],
+      "official_url": "https://telanganaepass.cgg.gov.in/",
+      "application_deadline": null,
+      "source_verified_on": "2026-11-21",
+      "verification_status": "VERIFIED",
+      "is_illustrative": false
+    }
+  ]
+}

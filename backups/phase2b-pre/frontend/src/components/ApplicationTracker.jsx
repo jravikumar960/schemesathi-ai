@@ -1,0 +1,225 @@
+﻿import { useEffect, useState } from "react";
+import { ClipboardList } from "lucide-react";
+
+const STATUSES = [
+  "NOT_STARTED",
+  "IN_PROGRESS",
+  "SUBMITTED",
+  "COMPLETED",
+];
+
+function getSessionKey() {
+  let key = localStorage.getItem("schemesathi_session");
+
+  if (!key) {
+    key = crypto.randomUUID();
+    localStorage.setItem("schemesathi_session", key);
+  }
+
+  return key;
+}
+
+export default function ApplicationTracker() {
+  const [sessionKey] = useState(getSessionKey);
+  const [schemes, setSchemes] = useState([]);
+  const [applications, setApplications] = useState([]);
+  const [selectedScheme, setSelectedScheme] = useState("");
+  const [error, setError] = useState("");
+  const [notice, setNotice] = useState("");
+
+  async function api(url, options = {}) {
+    const response = await fetch(url, {
+      ...options,
+      headers: {
+        "Content-Type": "application/json",
+        ...options.headers,
+      },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        typeof data.detail === "string"
+          ? data.detail
+          : `HTTP ${response.status}`
+      );
+    }
+
+    return data;
+  }
+
+  async function loadData() {
+    try {
+      const [schemeData, applicationData] = await Promise.all([
+        api("/api/schemes"),
+        api(`/api/applications?session_key=${encodeURIComponent(sessionKey)}`),
+      ]);
+
+      setSchemes(
+        Array.isArray(schemeData) ? schemeData : schemeData.schemes || []
+      );
+      setApplications(applicationData);
+      setError("");
+    } catch (err) {
+      setError(err.message);
+    }
+  }
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function fetchInitialData() {
+      try {
+        const [schemeResponse, applicationResponse] = await Promise.all([
+          fetch("/api/schemes"),
+          fetch(`/api/applications?session_key=${encodeURIComponent(sessionKey)}`),
+        ]);
+
+        if (!schemeResponse.ok || !applicationResponse.ok) {
+          throw new Error("Unable to load application tracking data.");
+        }
+
+        const [schemeData, applicationData] = await Promise.all([
+          schemeResponse.json(),
+          applicationResponse.json(),
+        ]);
+
+        if (cancelled) return;
+
+        setSchemes(
+          Array.isArray(schemeData) ? schemeData : schemeData.schemes || []
+        );
+        setApplications(applicationData);
+        setError("");
+      } catch (err) {
+        if (!cancelled) {
+          setError(err.message);
+        }
+      }
+    }
+
+    void fetchInitialData();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [sessionKey]);
+
+  async function addApplication(event) {
+    event.preventDefault();
+
+    if (!selectedScheme) return;
+
+    try {
+      await api("/api/applications", {
+        method: "POST",
+        body: JSON.stringify({
+          session_key: sessionKey,
+          scheme_slug: selectedScheme,
+        }),
+      });
+
+      setNotice("Application added successfully.");
+      setSelectedScheme("");
+      await loadData();
+    } catch (err) {
+      setError(err.message);
+    }
+  }
+
+  async function updateStatus(id, status) {
+    try {
+      await api(
+        `/api/applications/${id}?session_key=${encodeURIComponent(sessionKey)}`,
+        {
+          method: "PATCH",
+          body: JSON.stringify({ status }),
+        }
+      );
+
+      setNotice("Status updated successfully.");
+      await loadData();
+    } catch (err) {
+      setError(err.message);
+    }
+  }
+
+  return (
+    <section className="space-y-6">
+      <div>
+        <h2 className="text-2xl font-bold">Application Tracker</h2>
+        <p className="text-sm text-slate-500">
+          Track scholarship applications and update their progress.
+        </p>
+      </div>
+
+      <div className="rounded-2xl border bg-white p-6">
+        <div className="mb-4 flex items-center gap-2">
+          <ClipboardList className="text-indigo-600" />
+          <h3 className="font-semibold">Add Application</h3>
+        </div>
+
+        <form onSubmit={addApplication} className="flex flex-wrap gap-3">
+          <select
+            value={selectedScheme}
+            onChange={(e) => setSelectedScheme(e.target.value)}
+            className="flex-1 rounded-lg border p-3"
+          >
+            <option value="">Select scholarship</option>
+
+            {schemes.map((scheme) => (
+              <option key={scheme.slug} value={scheme.slug}>
+                {scheme.name}
+                {scheme.is_illustrative ? " (Demo)" : ""}
+              </option>
+            ))}
+          </select>
+
+          <button
+            type="submit"
+            className="rounded-lg bg-indigo-600 px-5 py-3 text-white"
+          >
+            Add Tracking
+          </button>
+        </form>
+
+        {error && <p className="mt-3 text-red-600">{error}</p>}
+        {notice && <p className="mt-3 text-green-700">{notice}</p>}
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2">
+        {applications.map((application) => (
+          <div
+            key={application.id}
+            className="rounded-2xl border bg-white p-5"
+          >
+            <h3 className="font-semibold">
+              {schemes.find((s) => s.slug === application.scheme_slug)?.name
+                || application.scheme_slug}
+            </h3>
+
+            <p className="mt-1 text-xs text-amber-700">
+              Tracking record only — not an official application status.
+            </p>
+
+            <select
+              value={application.status}
+              onChange={(e) =>
+                updateStatus(application.id, e.target.value)
+              }
+              className="mt-4 w-full rounded-lg border p-3"
+            >
+              {STATUSES.map((status) => (
+                <option key={status} value={status}>
+                  {status.replaceAll("_", " ")}
+                </option>
+              ))}
+            </select>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+

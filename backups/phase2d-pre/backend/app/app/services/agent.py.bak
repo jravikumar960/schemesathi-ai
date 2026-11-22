@@ -1,0 +1,83 @@
+﻿from typing import Any, TypedDict
+
+from langgraph.graph import StateGraph, START, END
+
+from app.services.eligibility import evaluate_scheme
+
+
+class AgentState(TypedDict, total=False):
+    profile: dict[str, Any]
+    schemes: list[Any]
+    results: list[dict[str, Any]]
+    response: str
+
+
+def evaluate_node(state: AgentState) -> dict:
+    profile = state.get("profile", {})
+    schemes = state.get("schemes", [])
+
+    results = [
+        evaluate_scheme(scheme, profile)
+        for scheme in schemes
+    ]
+
+    return {"results": results}
+
+
+def explain_node(state: AgentState) -> dict:
+    results = state.get("results", [])
+
+    if not results:
+        return {
+            "response": "No schemes are available for evaluation."
+        }
+
+    messages = []
+
+    for result in results:
+        name = result["scheme_name"]
+        status = result["status"]
+
+        if status == "ELIGIBLE":
+            explanation = (
+                "You satisfy the listed eligibility conditions."
+            )
+        elif status == "NOT_ELIGIBLE":
+            explanation = (
+                "At least one eligibility condition is not satisfied."
+            )
+        else:
+            missing = [
+                rule["field"]
+                for rule in result["rules"]
+                if rule["status"] == "NEEDS_INFORMATION"
+            ]
+
+            explanation = (
+                "Additional information is needed: "
+                + ", ".join(missing)
+                if missing
+                else "Eligibility cannot be determined."
+            )
+
+        messages.append(f"{name}: {status}. {explanation}")
+
+    return {
+        "response": "\n".join(messages)
+    }
+
+
+def build_agent():
+    graph = StateGraph(AgentState)
+
+    graph.add_node("evaluate", evaluate_node)
+    graph.add_node("explain", explain_node)
+
+    graph.add_edge(START, "evaluate")
+    graph.add_edge("evaluate", "explain")
+    graph.add_edge("explain", END)
+
+    return graph.compile()
+
+
+agent = build_agent()

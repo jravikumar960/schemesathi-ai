@@ -1,0 +1,225 @@
+{
+  "data_notice": "Synthetic development data only. Not actual government schemes.",
+  "schemes": [
+    {
+      "source_verified_on": null,
+      "application_steps": [
+        "Review illustrative eligibility criteria",
+        "Prepare sample documents",
+        "Complete the demonstration workflow"
+      ],
+      "level": "STATE",
+      "verification_status": "UNVERIFIED_ILLUSTRATIVE",
+      "benefit_summary": "Illustrative educational assistance.",
+      "name": "Illustrative Student Support Scheme 1",
+      "official_url": "https://example.org/",
+      "description": "Synthetic scholarship example for testing.",
+      "application_deadline": null,
+      "slug": "illustrative-student-support-1",
+      "document_requirements": [
+        "Sample income certificate",
+        "Sample student enrollment proof"
+      ],
+      "is_illustrative": true,
+      "eligibility_conditions": [
+        {
+          "field": "annual_family_income",
+          "operator": "lte",
+          "description": "Annual family income must be at most INR 250000.",
+          "value": 250000
+        }
+      ]
+    },
+    {
+      "source_verified_on": null,
+      "application_steps": [
+        "Review illustrative eligibility criteria",
+        "Prepare sample documents",
+        "Complete the demonstration workflow"
+      ],
+      "level": "STATE",
+      "verification_status": "UNVERIFIED_ILLUSTRATIVE",
+      "benefit_summary": "Illustrative educational assistance.",
+      "name": "Illustrative Student Support Scheme 2",
+      "official_url": "https://example.org/",
+      "description": "Synthetic scholarship example for testing.",
+      "application_deadline": null,
+      "slug": "illustrative-student-support-2",
+      "document_requirements": [
+        "Sample income certificate",
+        "Sample student enrollment proof"
+      ],
+      "is_illustrative": true,
+      "eligibility_conditions": [
+        {
+          "field": "annual_family_income",
+          "operator": "lte",
+          "description": "Annual family income must be at most INR 250000.",
+          "value": 250000
+        }
+      ]
+    },
+    {
+      "source_verified_on": null,
+      "application_steps": [
+        "Review illustrative eligibility criteria",
+        "Prepare sample documents",
+        "Complete the demonstration workflow"
+      ],
+      "level": "STATE",
+      "verification_status": "UNVERIFIED_ILLUSTRATIVE",
+      "benefit_summary": "Illustrative educational assistance.",
+      "name": "Illustrative Student Support Scheme 3",
+      "official_url": "https://example.org/",
+      "description": "Synthetic scholarship example for testing.",
+      "application_deadline": null,
+      "slug": "illustrative-student-support-3",
+      "document_requirements": [
+        "Sample income certificate",
+        "Sample student enrollment proof"
+      ],
+      "is_illustrative": true,
+      "eligibility_conditions": [
+        {
+          "field": "annual_family_income",
+          "operator": "lte",
+          "description": "Annual family income must be at most INR 250000.",
+          "value": 250000
+        }
+      ]
+    },
+    {
+      "source_verified_on": null,
+      "application_steps": [
+        "Review illustrative eligibility criteria",
+        "Prepare sample documents",
+        "Complete the demonstration workflow"
+      ],
+      "level": "STATE",
+      "verification_status": "UNVERIFIED_ILLUSTRATIVE",
+      "benefit_summary": "Illustrative educational assistance.",
+      "name": "Illustrative Student Support Scheme 4",
+      "official_url": "https://example.org/",
+      "description": "Synthetic scholarship example for testing.",
+      "application_deadline": null,
+      "slug": "illustrative-student-support-4",
+      "document_requirements": [
+        "Sample income certificate",
+        "Sample student enrollment proof"
+      ],
+      "is_illustrative": true,
+      "eligibility_conditions": [
+        {
+          "field": "annual_family_income",
+          "operator": "lte",
+          "description": "Annual family income must be at most INR 250000.",
+          "value": 250000
+        }
+      ]
+    },
+    {
+      "source_verified_on": null,
+      "application_steps": [
+        "Review illustrative eligibility criteria",
+        "Prepare sample documents",
+        "Complete the demonstration workflow"
+      ],
+      "level": "STATE",
+      "verification_status": "UNVERIFIED_ILLUSTRATIVE",
+      "benefit_summary": "Illustrative educational assistance.",
+      "name": "Illustrative Student Support Scheme 5",
+      "official_url": "https://example.org/",
+      "description": "Synthetic scholarship example for testing.",
+      "application_deadline": null,
+      "slug": "illustrative-student-support-5",
+      "document_requirements": [
+        "Sample income certificate",
+        "Sample student enrollment proof"
+      ],
+      "is_illustrative": true,
+      "eligibility_conditions": [
+        {
+          "field": "annual_family_income",
+          "operator": "lte",
+          "description": "Annual family income must be at most INR 250000.",
+          "value": 250000
+        }
+      ]
+    },
+    {
+      "name": "Telangana Post-Matric Scholarships",
+      "slug": "telangana-post-matric-scholarships",
+      "description": "Government of Telangana ePASS programme supporting eligible students pursuing post-secondary education. Income limits vary by welfare category and, for BC/EBC/Minority students, residence.",
+      "benefit_summary": "Reimbursement of eligible tuition fees (RTF) and maintenance support (MTF), subject to applicable programme rules.",
+      "level": "STATE",
+      "eligibility_conditions": [],
+      "document_requirements": [],
+      "application_steps": [],
+      "official_url": "https://telanganaepass.cgg.gov.in/",
+      "application_deadline": null,
+      "source_verified_on": null,
+      "verification_status": "UNVERIFIED_PROGRAMME",
+      "is_illustrative": false
+    },
+    {
+      "name": "Mahatma Jyothiba Phule Overseas Vidya Nidhi",
+      "slug": "mahatma-jyothiba-phule-overseas-vidya-nidhi",
+      "description": "Named Telangana overseas education programme. Current eligibility criteria have not been independently verified.",
+      "benefit_summary": "Potential overseas education assistance; benefit amount and conditions require official confirmation.",
+      "level": "State",
+      "eligibility_conditions": [],
+      "document_requirements": [],
+      "application_steps": [],
+      "official_url": "https://telanganaepass.cgg.gov.in/",
+      "application_deadline": null,
+      "source_verified_on": null,
+      "verification_status": "UNVERIFIED_PROGRAMME",
+      "is_illustrative": false
+    },
+    {
+      "name": "Ambedkar Overseas Vidya Nidhi - SC",
+      "slug": "ambedkar-overseas-vidya-nidhi-sc",
+      "description": "Named Telangana overseas education programme. Current eligibility criteria have not been independently verified.",
+      "benefit_summary": "Potential overseas education assistance; benefit amount and conditions require official confirmation.",
+      "level": "State",
+      "eligibility_conditions": [],
+      "document_requirements": [],
+      "application_steps": [],
+      "official_url": "https://telanganaepass.cgg.gov.in/",
+      "application_deadline": null,
+      "source_verified_on": null,
+      "verification_status": "UNVERIFIED_PROGRAMME",
+      "is_illustrative": false
+    },
+    {
+      "name": "Ambedkar Overseas Vidya Nidhi - ST",
+      "slug": "ambedkar-overseas-vidya-nidhi-st",
+      "description": "Named Telangana overseas education programme. Current eligibility criteria have not been independently verified.",
+      "benefit_summary": "Potential overseas education assistance; benefit amount and conditions require official confirmation.",
+      "level": "State",
+      "eligibility_conditions": [],
+      "document_requirements": [],
+      "application_steps": [],
+      "official_url": "https://telanganaepass.cgg.gov.in/",
+      "application_deadline": null,
+      "source_verified_on": null,
+      "verification_status": "UNVERIFIED_PROGRAMME",
+      "is_illustrative": false
+    },
+    {
+      "name": "Chief Minister's Overseas Scholarship for Minorities",
+      "slug": "chief-ministers-overseas-scholarship-minorities",
+      "description": "Named Telangana overseas education programme. Current eligibility criteria have not been independently verified.",
+      "benefit_summary": "Potential overseas education assistance; benefit amount and conditions require official confirmation.",
+      "level": "State",
+      "eligibility_conditions": [],
+      "document_requirements": [],
+      "application_steps": [],
+      "official_url": "https://telanganaepass.cgg.gov.in/",
+      "application_deadline": null,
+      "source_verified_on": null,
+      "verification_status": "UNVERIFIED_PROGRAMME",
+      "is_illustrative": false
+    }
+  ]
+}

@@ -1,0 +1,231 @@
+﻿import { useEffect, useState } from "react";
+import { ExternalLink, RefreshCw, ShieldCheck } from "lucide-react";
+import { isVerifiedScheme } from "../schemeLogic.js";
+
+function SchemeCard({ scheme }) {
+  const verified = isVerifiedScheme(scheme);
+
+  return (
+    <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      <span className={
+        verified
+          ? "rounded-full bg-emerald-100 px-3 py-1 text-xs font-medium text-emerald-800"
+          : "rounded-full bg-amber-100 px-3 py-1 text-xs font-medium text-amber-800"
+      }>
+        {verified ? "Official source recorded" : "Illustrative demo"}
+      </span>
+
+      <h3 className="mt-4 text-xl font-bold">{scheme.name}</h3>
+      <p className="mt-2 text-sm leading-6 text-slate-600">
+        {scheme.description}
+      </p>
+
+      <p className="mt-3 text-sm font-semibold">
+        {scheme.benefit_summary}
+      </p>
+
+      {verified && (
+        <div className="mt-4 rounded-xl bg-blue-50 p-4 text-sm text-blue-900">
+          <div className="flex items-center gap-2 font-semibold">
+            <ShieldCheck size={17} />
+            Source information
+          </div>
+          <p className="mt-2">
+            Recorded verification date:{" "}
+            {scheme.source_verified_on || "Not provided"}
+          </p>
+          <p className="mt-2">
+            Full eligibility has not been determined. Income assessment
+            is only one part of the scholarship requirements.
+          </p>
+        </div>
+      )}
+
+      <details className="mt-5 rounded-xl bg-slate-50 p-4">
+        <summary className="cursor-pointer font-semibold">
+          Requirements, documents and application steps
+        </summary>
+
+        <h4 className="mt-4 font-semibold">Eligibility rules</h4>
+        {scheme.eligibility_conditions?.length ? (
+          <ul className="mt-2 list-disc space-y-2 pl-5 text-sm">
+            {scheme.eligibility_conditions.map((rule, index) => (
+              <li key={index}>{rule.description}</li>
+            ))}
+          </ul>
+        ) : (
+          <p className="mt-2 text-sm text-amber-800">
+            Complete eligibility rules are not yet encoded.
+            Refer to the official portal.
+          </p>
+        )}
+
+        <h4 className="mt-4 font-semibold">Document checklist</h4>
+        <ul className="mt-2 list-disc space-y-2 pl-5 text-sm">
+          {(scheme.document_requirements || []).map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+
+        <h4 className="mt-4 font-semibold">Application steps</h4>
+        <ol className="mt-2 list-decimal space-y-2 pl-5 text-sm">
+          {(scheme.application_steps || []).map((step, index) => (
+            <li key={index}>{step}</li>
+          ))}
+        </ol>
+      </details>
+
+      {verified && scheme.official_url && (
+        <a
+          href={scheme.official_url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-5 inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-3 text-sm font-semibold text-white hover:bg-indigo-700"
+        >
+          Visit official portal
+          <ExternalLink size={16} />
+        </a>
+      )}
+    </article>
+  );
+}
+
+export default function SchemeExplorer() {
+  const [schemes, setSchemes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  async function loadSchemes() {
+    setLoading(true);
+    setError("");
+
+    try {
+      const response = await fetch("/api/schemes");
+
+      if (!response.ok) {
+        throw new Error("Unable to load scholarship schemes.");
+      }
+
+      const data = await response.json();
+      const records = Array.isArray(data)
+        ? data
+        : data.schemes || [];
+
+      setSchemes(records);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function fetchInitialSchemes() {
+      try {
+        const response = await fetch("/api/schemes");
+
+        if (!response.ok) {
+          throw new Error("Unable to load scholarship schemes.");
+        }
+
+        const data = await response.json();
+
+        if (!cancelled) {
+          setSchemes(
+            Array.isArray(data) ? data : data.schemes || []
+          );
+          setError("");
+        }
+      } catch (err) {
+        if (!cancelled) {
+          setError(err.message);
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    }
+
+    void fetchInitialSchemes();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const official = schemes.filter((scheme) => isVerifiedScheme(scheme));
+
+  const demos = schemes.filter((scheme) => !isVerifiedScheme(scheme));
+
+  return (
+    <section className="space-y-6">
+      <div className="flex items-center justify-between gap-4">
+        <div>
+          <h2 className="text-2xl font-bold">
+            Explore scholarships
+          </h2>
+          <p className="mt-1 text-sm text-slate-500">
+            Review programme information and official application sources.
+          </p>
+        </div>
+
+        <button
+          type="button"
+          onClick={loadSchemes}
+          disabled={loading}
+          className="flex items-center gap-2 rounded-lg border border-slate-300 px-3 py-2 text-sm disabled:opacity-50"
+        >
+          <RefreshCw size={16} />
+          Refresh
+        </button>
+      </div>
+
+      {loading && <p>Loading scholarships...</p>}
+
+      {error && (
+        <p role="alert" className="text-sm text-red-600">
+          {error}
+        </p>
+      )}
+
+      {!loading && !error && (
+        <>
+          <div className="grid gap-5 md:grid-cols-2">
+            {official.map((scheme) => (
+              <SchemeCard key={scheme.slug} scheme={scheme} />
+            ))}
+          </div>
+
+          {official.length === 0 && (
+            <p className="text-sm text-slate-500">
+              No source-verified programme records are available.
+            </p>
+          )}
+
+          {demos.length > 0 && (
+            <details className="rounded-2xl border border-amber-200 bg-amber-50 p-5">
+              <summary className="cursor-pointer font-semibold text-amber-900">
+                Illustrative and unverified records ({demos.length})
+              </summary>
+
+              <p className="mt-3 text-sm text-amber-900">
+                These records are retained for development and testing.
+                They must not be treated as official government schemes.
+              </p>
+
+              <div className="mt-5 grid gap-5 md:grid-cols-2">
+                {demos.map((scheme) => (
+                  <SchemeCard key={scheme.slug} scheme={scheme} />
+                ))}
+              </div>
+            </details>
+          )}
+        </>
+      )}
+    </section>
+  );
+}
+
