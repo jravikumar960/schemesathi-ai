@@ -19,3 +19,7 @@ frontend/dist/
 
 schemesathi-*-backup-*/
 *.zip
+
+backups/
+*backup*/
+*backup-*/

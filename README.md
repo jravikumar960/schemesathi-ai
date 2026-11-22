@@ -104,7 +104,7 @@ Frontend:
     npm run build
 
 Latest verified results:
-- 82 backend tests passed
+- 173 backend tests passed
 - ESLint: zero errors and warnings
 - Frontend production build: successful
 
@@ -127,3 +127,23 @@ https://telanganaepass.cgg.gov.in/
 
 SchemeSathi AI is a hackathon prototype, not an official
 government scholarship service.
+
+## Additional Features
+
+- English and Telugu interface language selector
+- Bilingual sample student profiles
+- Scholarship source and verification information
+- Deadline dashboard with browser-based reminders
+- Document preparation checklist
+- Personal application tracking
+
+## Language Support
+
+The interface supports English and Telugu.
+Supported Telugu sample profiles are mapped to English for
+eligibility processing. Arbitrary Telugu input is not fully supported.
+
+## Reminder Limitations
+
+Reminders work while the application is open in the browser.
+The prototype does not provide background email or SMS reminders.
